@@ -1,5 +1,7 @@
 # Football Data Analytics Platform
 
+[Русская версия README](README_RU.md)
+
 A personal football data analytics project focused on collecting, processing, storing and analysing football statistics using SQL, SQLite, Python and Metabase.
 
 The project started as an Excel spreadsheet in 2020 and gradually evolved into a relational database and a set of analytical tools for exploring team and player performance.
