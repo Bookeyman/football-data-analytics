@@ -1171,7 +1171,7 @@ ORDER BY 4 DESC, 3 DESC;
 CREATE VIEW V_Table AS
 
 WITH Ss AS (
-  SELECT 2027 AS s
+  SELECT MAX(season) AS s FROM Matches
 ),
 TeamStats AS (
   SELECT
