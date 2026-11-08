@@ -1,0 +1,24 @@
+# SQLite databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets
+.env
+.env.*
+secrets.json
+config_private.py
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# Excel temporary files
+~$*.xlsx
+~$*.xls
