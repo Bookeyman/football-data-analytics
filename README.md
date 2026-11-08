@@ -73,17 +73,52 @@ Database schema diagram:
 
 ## Analytical Examples
 
-### Team review
+The dashboards are designed to answer specific analytical questions rather than only display statistics.
+
+### 1. Team review — how does one club perform across the season?
 
 ![Team review](dashboards/team_review.png)
 
-### Team comparison
+**Question answered:** What are the team's main strengths and weaknesses, and which players contribute most?
+
+The report combines club information, player-level output and team-level indicators. It helps review scoring, expected goals, shots, passing accuracy, final-third passing, duels and other match metrics in one place.
+
+**Example from the screenshot:** CSKA's 2024/25 report shows 1.57 goals and 1.42 xG per match, alongside 0.70 goals conceded and 1.05 xG conceded per match. The passing panels show 83.5% overall passing accuracy and 69.1% accuracy on passes into the final third. This makes it possible to compare attacking output with chance quality and to identify where possession becomes less effective.
+
+### 2. Team comparison — where do two clubs differ?
 
 ![Teams comparison](dashboards/teams_comparison.png)
 
-### Player radar
+**Question answered:** Which of two selected clubs performs better, how do their head-to-head matches look, and where are the biggest statistical differences?
+
+The report combines the league table, head-to-head results, goals versus xG, position changes during the season, and leaders in attacking, creative and defensive metrics.
+
+**Example from the screenshot:** In 2024/25, CSKA finished third with 59 points and Spartak fourth with 57. Spartak scored 56 goals against 52.5 xG, while CSKA scored 47 against 42.62 xG. The report therefore gives context beyond the final table: it shows both the result and the underlying chance production. The head-to-head panel also shows both meetings, making the seasonal comparison easier to interpret.
+
+### 3. Player radar — how do two players in the same role differ?
 
 ![Player radar](dashboards/two%E2%80%91player%20radar.png)
+
+**Question answered:** Which skills distinguish two players who play in the same position?
+
+The radar compares Wendel and Matvey Kislyak as defensive midfielders in 2025/26. Indicators are normalised per 90 minutes, and the comparison pool is restricted to defensive midfielders with at least 300 minutes and four appearances in that position (29 players in the shown sample). The chart also displays total minutes and minutes played in the selected position, so the comparison has playing-time context.
+
+The report is intended to reveal different statistical profiles, not to declare one player universally better. A larger value on one axis should be interpreted in the context of the player's role and the metric definition.
+
+## SQL Analytics Case Studies
+
+The `sql/analytics/` directory contains separate, documented examples. Each file states the analytical question, data sources, query, expected result structure and how to interpret the output.
+
+| File | Analytical question | Main SQL techniques / objects |
+|---|---|---|
+| `01_team_performance.sql` | How do teams perform in the table and in attack? | Views, CTE, aggregation, conditional metrics |
+| `02_player_performance.sql` | Which players perform best after a minutes threshold? | Views, ranking, calculated metrics |
+| `03_player_value_epv.sql` | Which players add value through carrying, open play and set pieces? | View, per-90 calculations, ranking |
+| `04_game_state_analysis.sql` | Which teams recover after falling behind or protect a lead? | CTE-based views, JOIN, CASE, ratios |
+| `05_goal_contribution.sql` | Which combinations and player roles contribute to goals? | Views, aggregation, percentage calculations |
+| `06_transfer_analysis.sql` | Which transfers and clubs have the highest recorded fees? | Self-join, CTE, window function, aggregation |
+
+Run the scripts against the SQLite database after creating the schema and loading the required data. The repository does not include the database itself, so numeric query outputs are not embedded as if they had been independently reproduced from a clean database.
 
 ## Repository Structure
 
@@ -106,7 +141,12 @@ football-data-analytics/
 │
 ├── sql/
 │   ├── analytics/
-│   │   └── analytical_queries.sql
+│   │   ├── 01_team_performance.sql
+│   │   ├── 02_player_performance.sql
+│   │   ├── 03_player_value_epv.sql
+│   │   ├── 04_game_state_analysis.sql
+│   │   ├── 05_goal_contribution.sql
+│   │   └── 06_transfer_analysis.sql
 │   └── database/
 │       ├── 01_schema.sql
 │       ├── 02_indexes.sql
